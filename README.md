@@ -39,11 +39,11 @@
 
 
  preserve-data-in-the-browser
-# 📖 [ Awesome books] <a name="about-project"></a>
+# 📖 [ Todo List] <a name="about-project"></a>
 
 
 
->**Awsome book project in this project the user adds a book alongside with the author of the book and then display when you click on add button and it is also stored in the local storage**
+>**Todo List project in this project the user adds a todo list and remove and then display when you click on add button and it is also stored in the local storage**
 
 **[]** is a...
 
@@ -217,9 +217,9 @@ You can deploy this project using:
 
 > Describe 1 - 3 features you will add to the project.
 
-- [ ] **[new_feature_1]**
-- [ ] **[new_feature_2]**
-- [ ] **[new_feature_3]**
+- [ ] **[Add_animations]**
+- [ ] **[Add_gradient_colors]**
+- [ ] **[Implement_saving_of_edit]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
