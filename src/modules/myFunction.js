@@ -8,7 +8,7 @@ export default function displayTodoTask() {
 
   todos.forEach((todo) => {
     const todoItems = document.createElement('div');
-    todoItems.classList.add('todo-items');
+    todoItems.classList.add('todo-items', todo.done ? 'done' : 'a');
 
     const label = document.createElement('lable');
     const input = document.createElement('input');
@@ -40,6 +40,16 @@ export default function displayTodoTask() {
     actions.appendChild(editBtn);
     actions.appendChild(removeBtn);
 
+    input.addEventListener('change', () => {
+        todo.done = !todo.done;
+        localStorage.setItem('todos', JSON.stringify(todos));
+        if (todo.done) {
+          todoItems.classList.add('done');
+        } else {
+          todoItems.classList.remove('done');
+        }
+      });
+
     editBtn.addEventListener('click', () => {
       const inputs = contents.querySelector('input');
       inputs.removeAttribute('readonly');
@@ -57,4 +67,11 @@ export default function displayTodoTask() {
       e.target.parentElement.parentElement.remove();
     });
   });
-}
+};
+
+const clearBtn = document.querySelector('.clear');
+
+clearBtn.addEventListener('click', () => {
+  strRemove.allCompleted();
+  displayTodoTask();
+});
