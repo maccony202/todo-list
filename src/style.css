@@ -39,8 +39,9 @@ h3 {
   margin-top: 20px;
 }
 
-.task{
-  list-style: none;display: flex;
+.task {
+  list-style: none;
+  display: flex;
 }
 
 .items {
