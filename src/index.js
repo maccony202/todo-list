@@ -1,28 +1,65 @@
 // import _ from 'lodash';
 import './style.css';
-import displayTodoTask from './modules/myFunction.js';
+import { listItems, addItems, addBtn } from './modules/variables.js';
+import {
+  addNewList,
+  generateList,
+  pushToLocal,
+  showList,
+  removeList,
+  checkCompleted,
+} from './modules/display.js';
+import removeAllCompleted from './modules/clearComplete.js';
+import checkedBox from './modules/complete.js';
 
 window.addEventListener('load', () => {
-  const todos = JSON.parse(localStorage.getItem('todos')) || [];
-  const TodoForm = document.querySelector('#todo-form');
+  showList();
+});
 
-  TodoForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+addItems.addEventListener('keypress', (e) => {
+  const { target } = e;
+  if (target.value === '') return;
+  if (e.key === 'Enter') {
+    addNewList();
+  }
+});
 
-    const todo = {
-      contents: e.target.elements.content.value,
-      done: false,
-      id: todos.length + 1,
-    };
+addBtn.addEventListener('click', () => {
+  addNewList();
+  generateList();
+  pushToLocal();
+});
 
-    todos.push(todo);
+listItems.addEventListener('click', (e) => {
+  const { target } = e;
+  const parentElement = target.parentNode;
+  if (!parentElement.classList.contains('task')) return;
+  const eachListId = Number(parentElement.id);
+  // target the data action
+  const { action } = target.dataset;
 
-    localStorage.setItem('todos', JSON.stringify(todos));
+  if (action === 'delete') {
+    removeList(eachListId);
+  }
+});
 
-    e.target.reset();
+listItems.addEventListener('change', (e) => {
+  const { target } = e;
+  const parentElement = target.parentNode;
+  if (!parentElement.classList.contains('item')) return;
+  const eachListId = Number(parentElement.id);
+  // target the data action
+  const { action } = target.dataset;
 
-    displayTodoTask();
-  });
+  if (action === 'checkbox') {
+    checkCompleted(eachListId, target);
+    checkedBox(target);
+  }
+});
 
-  displayTodoTask();
+const clearButton = document.querySelector('.clear');
+clearButton.addEventListener('click', () => {
+  removeAllCompleted();
+  generateList();
+  pushToLocal();
 });

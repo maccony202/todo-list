@@ -39,7 +39,12 @@ h3 {
   margin-top: 20px;
 }
 
-.todo-items {
+.task {
+  list-style: none;
+  display: flex;
+}
+
+.items {
   display: flex;
   justify-content: space-between;
   margin: 10px;
