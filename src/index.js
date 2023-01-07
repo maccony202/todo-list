@@ -1,13 +1,14 @@
 // import _ from 'lodash';
- import './style.css';
+import './style.css';
 import { listItems, addItems, addBtn } from './modules/variables.js';
-import { addNewList,
-          generateList,
-          pushToLocal,
-          showList,
-          removeList,
-          checkCompleted,
-    } from './modules/display.js';
+import {
+  addNewList,
+  generateList,
+  pushToLocal,
+  showList,
+  removeList,
+  checkCompleted,
+} from './modules/display.js';
 import removeAllCompleted from './modules/clearComplete.js';
 import checkedBox from './modules/complete.js';
 

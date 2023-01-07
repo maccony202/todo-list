@@ -1,25 +1,36 @@
-import { listItems, addItems } from "./variables.js";
+import { listItems } from './variables.js';
 import checkedBox from './complete.js';
 
+// eslint-disable-next-line import/no-mutable-exports
 export let todos = [];
 
 const pushToLocal = () => {
-    localStorage.setItem('todos', JSON.stringify(todos));
+  localStorage.setItem('todos', JSON.stringify(todos));
 };
 
-const addNewList = () => {
-    const task = {};
-    task.index = todos.length + 1;
-    task.description = addItems.value;
-    task.completed = false;
-    todos.push(task);
-  
-    pushToLocal();
-  };
+// const addNewList = () => {
+//     const task = {};
+//     task.index = todos.length + 1;
+//     task.description = addItems.value;
+//     task.completed = false;
+//     todos.push(task);
 
-  const generateList = () => {
-    todos.forEach((task) => {
-        listItems.innerHTML += `
+//     pushToLocal();
+//   };
+
+const addNewList = () => {
+  const task = {};
+  task.description = 'Test task';
+  task.completed = false;
+  task.index = 1;
+  const todos = localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : [];
+  todos.push(task);
+  localStorage.setItem('todos', JSON.stringify(todos));
+};
+
+const generateList = () => {
+  todos.forEach((task) => {
+    listItems.innerHTML += `
         
         <li class="task" >
           <div class='item' >
@@ -35,67 +46,67 @@ const addNewList = () => {
          
         </li>
         `;
-        task.value = '';
-    });
-  };
+    task.value = '';
+  });
+};
 
-  const completed = (id) => {
-    if (localStorage.getItem('todos')) {
-      todos = JSON.parse(localStorage.getItem('todos'));
-    }
-    todos[id].completed = true;
-    pushToLocal();
-  };
+const completed = (id) => {
+  if (localStorage.getItem('todos')) {
+    todos = JSON.parse(localStorage.getItem('todos'));
+  }
+  todos[id].completed = true;
+  pushToLocal();
+};
 
-  const notCompleted = (id) => {
-    if (localStorage.getItem('todos')) {
-      todos = JSON.parse(localStorage.getItem('todos'));
-    }
-    todos[id].completed = false;
-    pushToLocal();
-  };
+const notCompleted = (id) => {
+  if (localStorage.getItem('todos')) {
+    todos = JSON.parse(localStorage.getItem('todos'));
+  }
+  todos[id].completed = false;
+  pushToLocal();
+};
 
-  const showList = () => {
-    if (localStorage.getItem('todos')) {
-      todos = JSON.parse(localStorage.getItem('todos'));
-    }
-    generateList();
-  };
+const showList = () => {
+  if (localStorage.getItem('todos')) {
+    todos = JSON.parse(localStorage.getItem('todos'));
+  }
+  generateList();
+};
 
-  const editTask = (id, value) => {
-    todos[id].description = value;
-    pushToLocal();
-  };
+const editTask = (id, value) => {
+  todos[id].description = value;
+  pushToLocal();
+};
 
-  const removeList = (index) => {
-    if (localStorage.getItem('todos')) {
-      todos = JSON.parse(localStorage.getItem('todos'));
-    }
-    todos.splice(index - 1, 1);
-    for (let i = 1; i < todos.length; i += 1) {
-      todos[i - 1].index = i;
-    }
-    pushToLocal();
-  };
+const removeList = (index) => {
+  if (localStorage.getItem('todos')) {
+    todos = JSON.parse(localStorage.getItem('todos'));
+  }
+  todos.splice(index - 1, 1);
+  for (let i = 1; i < todos.length; i += 1) {
+    todos[i - 1].index = i;
+  }
+  pushToLocal();
+};
 
-  const checkCompleted = (buttonId, box) => {
-    box.nextElementSibling.classList.toggle('mark-completed');
-    todos[buttonId].completed = checkedBox(box);
-    pushToLocal(todos);
-    if (todos[buttonId].completed === true) {
-      box.checked = true;
-      box.nextElementSibling.classList.add('mark-completed');
-    }
-  };
+const checkCompleted = (buttonId, box) => {
+  box.nextElementSibling.classList.toggle('mark-completed');
+  todos[buttonId].completed = checkedBox(box);
+  pushToLocal(todos);
+  if (todos[buttonId].completed === true) {
+    box.checked = true;
+    box.nextElementSibling.classList.add('mark-completed');
+  }
+};
 
-  export {
-    addNewList,
-    generateList,
-    pushToLocal,
-    showList,
-    removeList,
-    checkCompleted,
-    editTask,
-    completed,
-    notCompleted,
-  };
+export {
+  addNewList,
+  generateList,
+  pushToLocal,
+  showList,
+  removeList,
+  checkCompleted,
+  editTask,
+  completed,
+  notCompleted,
+};
